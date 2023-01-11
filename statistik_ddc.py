@@ -46,10 +46,6 @@ try:
 except:
     input_file = input("Bitte Input-File angeben: ")
 
-#with open("ergebnis", "r") as erg_alt:
-#    alt = csv.reader(erg_alt, delimiter=",")
-#    ergebnis = {line[0]:int(line[1]) for line in alt}
-
 with open(input_file, "r") as ddcs:
     count = csv.reader(ddcs, delimiter="\t")
     ddcs_list = [[line[0].strip(), int(line[1].strip())] for line in count]
