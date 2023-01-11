@@ -13,6 +13,8 @@ def zerlegung(x):
     temp = []
     notations = {}
 
+    #ToDo Regelung einbauen, falls coli-ana streikt
+
     for k in range(3):
         try:
             r
