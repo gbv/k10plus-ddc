@@ -2,42 +2,46 @@ import sys
 import requests
 import csv
 import time
-import concurrent.futures
+#import concurrent.futures
 from itertools import islice
 
 def zerlegung(x):
-    global keine_zerlegung_möglich
-    par = {'notation': x[0], 'complete': True}
+    global keine_vollständige_zerlegung_möglich
+    par = {'notation': x[0]}
     r = requests.get('https://coli-conc.gbv.de/coli-ana/app/analyze', params=par)
     j = 0
     temp = []
     notations = {}
-
-    #ToDo Regelung einbauen, falls coli-ana streikt
-
-    for k in range(3):
+    
+    for k in range(5):
         try:
-            r
+            len(r.json()) > 0 == True
         except requests.exceptions.RequestException:
-            print("Abfrage gescheitert. Versuche es in 5 Minuten nocheinmal")
+            print("Abfrage gescheitert. Versuche es in 5 Minuten noch einmal")
             time.sleep(320)
 
-    if bool(r.json()):
-        for element in r.json()[0]['memberList']:
-            j += 1
-            if j == len(r.json()[0]['memberList']):
-                notations[element['notation'][0]] = x[1]
-                if bool(temp) and bool(temp[0].get('broader')) and not bool(element.get('broader')):
-                    notations[temp[0]['notation'][0]] = x[1]
-            elif bool(temp) and bool(temp[0].get('broader')) and not bool(element.get('broader')):
+    for element in r.json()[0]['memberList']:
+        j += 1
+        if element is None:
+            if bool(len(temp) > 0):
                 notations[temp[0]['notation'][0]] = x[1]
-                temp = []
+                keine_vollständige_zerlegung_möglich += 1
+                break
             else:
-                temp = []
-                temp.append(element)
-        return notations
-    else:
-        keine_zerlegung_möglich += 1
+                keine_vollständige_zerlegung_möglich += 1
+                break
+        elif j == len(r.json()[0]['memberList']):
+            notations[element['notation'][0]] = x[1]
+            if bool(temp) and bool(temp[0].get('broader')) and not bool(element.get('broader')):
+                notations[temp[0]['notation'][0]] = x[1]
+        elif bool(temp) and bool(temp[0].get('broader')) and not bool(element.get('broader')):
+            notations[temp[0]['notation'][0]] = x[1]
+            temp = []
+        else:
+            temp = []
+            temp.append(element)
+
+    return notations
 
 ergebnis = {}
 
@@ -50,15 +54,16 @@ with open(input_file, "r") as ddcs:
     count = csv.reader(ddcs, delimiter="\t")
     ddcs_list = [[line[0].strip(), int(line[1].strip())] for line in count]
 
+#Testliste
 #    ddcs_list_klein = []
-#    for item in islice(ddcs_list, 10, 11):
+#    for item in islice(ddcs_list, 0, 4):
 #        ddcs_list_klein.append(item)
 
     zeilen = len(ddcs_list)
     i = 0
     start = time.time()
     duration_gesamt = 0
-    keine_zerlegung_möglich = 0
+    keine_vollständige_zerlegung_möglich = 0
 
     def progress(percent=0, dur=0, e=0, width=40):
         left = width * percent // 100
@@ -68,7 +73,7 @@ with open(input_file, "r") as ddcs:
         spaces = " " * right
         percents = f"{percent:.0f}%"
         
-        print("\r[", tags, spaces, "]", percents, int(dur/60), "Min. vergangen", int(e/60), "Min. übrig", keine_zerlegung_möglich, sep=" ", end="", flush=True)
+        print("\r[", tags, spaces, "]", percents, int(dur/60), "Min. vergangen", int(e/60), "Min. übrig", keine_vollständige_zerlegung_möglich, sep=" ", end="", flush=True)
 
     def handle_result(h):
         for m, n in h.items():
@@ -77,10 +82,15 @@ with open(input_file, "r") as ddcs:
             else:
                 ergebnis[m] += n
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        for result in executor.map(zerlegung, ddcs_list):
-            i += 1
-            if i % 10 == 0:
+# Methode für mehrere Anfragen gleichzeitig. Getestet mit max. 2   
+# with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+#        for result in executor.map(zerlegung, ddcs_list):
+#            i += 1
+
+    for line in ddcs_list:
+        result = zerlegung(line)
+        i += 1
+        if i % 10 == 0:
                 end = time.time()
                 duration = end - start
                 duration_gesamt += duration
@@ -90,17 +100,11 @@ with open(input_file, "r") as ddcs:
                 start = time.time()
                 if result != None:
                     handle_result(result)
-            elif result != None:
-                handle_result(result)
+        elif result != None:
+            handle_result(result)
 
 
-with open("ergebnis", "w") as erg:
-    erg.write("Keine Zerlegung möglich")
-    erg.write(",")
-    erg.write(str(keine_zerlegung_möglich))
-    erg.write("\n")
-    for t, u in ergebnis.items():
-        erg.write(t)
-        erg.write(",")
-        erg.write(str(u))
-        erg.write("\n")
+with open("ergebnis.csv", "w") as erg:
+    erg.write("%s,%s\n"%("Keine vollständige Zerlegung möglich",keine_vollständige_zerlegung_möglich))
+    for key in ergebnis.keys():
+            erg.write("%s,%s\n"%(key,ergebnis[key]))
