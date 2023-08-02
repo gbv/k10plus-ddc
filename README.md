@@ -1,2 +1,3 @@
-# coli-ana-scripts
-Collection if scripts concerning coli-ana
+# Analyse von Notationsbestandteilen gebildeter DDC-Notationen im K10plus
+
+TODO
