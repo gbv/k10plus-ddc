@@ -1,4 +1,5 @@
 {
+  "name": "k10plus-ddc",
   "type": "module",
   "dependencies": {
     "axios": "^1.4.0",
