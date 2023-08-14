@@ -1,3 +1,4 @@
-# Analyse von Notationsbestandteilen gebildeter DDC-Notationen im K10plus
+# K10plus DDC
 
-TODO
+This repository contains scripts to analyze, convert and publish Dewey Decimal Classification (DDC) found K10plus catalog.
+
