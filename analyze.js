@@ -1,6 +1,8 @@
 import axios from "axios"
 import fs from "fs"
 
+const fatal = msg => { console.error(msg); process.exit(1) }
+
 // Parse arguments
 const args = [...process.argv.slice(2)]
 let override = false, continueFromNotation = null, file = "result.ndjson", api = "https://coli-conc.gbv.de/coli-ana/dev/analyze", input = "./ddcs", arg
@@ -15,25 +17,22 @@ while (arg = args.shift()) {
     case "-f":
       file = args.shift()
       if (!file) {
-        console.error("-f needs an argument")
-        process.exit(1)
+          fatal("-f needs an argument")
       }
       break
     case "--api":
       api = args.shift()
       if (!api) {
-        console.error("--api needs an argument")
-        process.exit(1)
+        fatal("--api needs an argument")
       }
       break
     case "--input":
       input = args.shift()
       if (!input) {
-        console.error("--input needs an argument")
-        process.exit(1)
+        fatal("--input needs an argument")
       }
     default:
-      console.warn("Unknown argument:", arg)
+      fatal("Unknown argument:", arg)
   }
 }
 
@@ -43,8 +42,7 @@ let ddcs = fs.readFileSync(input, "utf-8").split("\n")
 if (continueFromNotation) {
   const index = ddcs.findIndex(ddc => ddc.startsWith(`${continueFromNotation} \t`))
   if (index === -1) {
-    console.error(`Notation ${continueFromNotation} not found in ${input}, exiting...`)
-    process.exit(1)
+    fatal(`Notation ${continueFromNotation} not found in ${input}, exiting...`)
   }
   ddcs = ddcs.slice(index)
 }
