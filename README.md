@@ -4,6 +4,7 @@ This repository contains scripts to analyze, convert and publish Dewey Decimal C
 
 [coli-ana]: https://github.com/gbv/coli-ana
 [K10plus Subjects]: https://github.com/gbv/k10plus-subjects
+[jskos]: https://format.gbv.de/jskos
 
 ## Overview
 

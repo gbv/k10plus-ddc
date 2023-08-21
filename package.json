@@ -3,6 +3,7 @@
   "type": "module",
   "dependencies": {
     "axios": "^1.4.0",
-    "json-anystream": "^1.1.1"
+    "json-anystream": "^1.1.1",
+    "pica-data": "^0.7.0"
   }
 }
