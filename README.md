@@ -1,23 +1,40 @@
 # K10plus DDC
 
-This repository contains scripts to analyze, convert and publish Dewey Decimal Classification (DDC) numbers found K10plus catalog. The analysis is mainly based on [coli-ana] DDC number decomposition.
+This repository contains scripts to analyze, convert and publish Dewey Decimal Classification (DDC) numbers found K10plus catalogue. The analysis is mainly based on [coli-ana] DDC number decomposition.
 
 [coli-ana]: https://github.com/gbv/coli-ana
 [K10plus Subjects]: https://github.com/gbv/k10plus-subjects
 [jskos]: https://format.gbv.de/jskos
 
-## Usage
-
-### Installation
+## Installation
 
 ~~~sh
 npm ci
 ~~~
 
-### bin/k10plus-patch.js
+## Usage
 
-This script reads PICA+ records or PPNs, extracts DDC fields, retrieves DDC
-analysis and emits PICA Patch files to insert result into the records.
+The script `bin/k10plus-patch.js`
+
+1. reads PICA+ records (or PPNs to retrieve records from K10plus)
+2. extracts DDC fields from the records
+3. retrieves DDC analysis (cached in a local database)
+4. and emits [PICA Patch](https://format.gbv.de/pica/patch/specification) files to modify records
+
+~~~
+Usage: k10plus-patch [options] < file
+
+Check and extend DDC numbers in PICA records of K10plus catalogue
+
+Options:
+  -a, --api <URL>        coli-ana API endpoint
+  -c, --continue <ppn>   continue after given PPN (expect sorted)
+  -f, --format <name>    PICA+ serialization (default: plain)
+  -i, --input <file>     input file (default: - for STDIN)
+  -d, --database <file>  optional SQLite file for caching
+  -p, --ppns             input is list of PPNs instead of PICA records
+  -h, --help             display help for command
+~~~
 
 ### analyze.js
 

@@ -15,6 +15,7 @@ program
   .option('-c, --continue <ppn>', 'continue after given PPN (expect sorted)')
   .option('-f, --format <name>', 'PICA+ serialization (default: plain)')
   .option('-i, --input <file>', 'input file (default: - for STDIN)')
+  .option('-d, --database <file>', 'optional SQLite file for caching')
   .option('-p, --ppns', 'input is list of PPNs instead of PICA records')
   .action(action)
 
