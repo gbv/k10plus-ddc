@@ -36,6 +36,10 @@ Options:
   -h, --help             display help for command
 ~~~
 
+### simplify-for-pdf.jq
+
+    sqlite3 cache.sqlite 'select analysis from coliana' | jq -f simplify-for-pdf.jq -c | sort | uniq
+
 ### analyze.js
 
 - `analyze.js` - read a list of (numerically sorted) DDC numbers and generate analysis with coli-ana 
