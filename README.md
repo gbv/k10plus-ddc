@@ -42,8 +42,11 @@ Options:
 
 ### analyze.js
 
-- `analyze.js` - read a list of (numerically sorted) DDC numbers and generate analysis with coli-ana 
-- `count.js` - calculate frequency of individual DDC elements in analysis result and emit as CSV or JSKOS concept list
+Read a list of (numerically sorted) DDC numbers and generate analysis with coli-ana
+
+### count.js
+
+Calculate frequency of individual DDC elements in analysis result and emit as CSV or JSKOS concept list
 
 ## Data in this repository
 
