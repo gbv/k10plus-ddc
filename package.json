@@ -1,6 +1,12 @@
 {
   "name": "k10plus-ddc",
   "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint '*./**/*.js';",
+    "fix": "eslint --fix './**/*.js'"
+  }, 
   "dependencies": {
     "axios": "^1.4.0",
     "better-sqlite3": "^8.5.2",
@@ -8,5 +14,9 @@
     "json-anystream": "^1.1.1",
     "pica-data": "^0.7.0",
     "split2": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-gbv": "^1.0.3"
   }
 }
