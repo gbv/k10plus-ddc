@@ -18,18 +18,21 @@ await program.parseAsync(process.argv)
 
 async function action(opt, args) {
   const input = (opt.input ?? "-") == "-" ? process.stdin : fs.createReadStream(opt.input)
-  const output = (opt.output ?? "-") == "-" ? process.stdin : fs.createReadStream(opt.output)
+  const output = (opt.output ?? "-") == "-" ? process.stdout : fs.createWriteStream(opt.output)
 
   const analyzer = new Analyzer(opt)
 
   let analyzedCount = 0, failedCount = 0
   const startTime = new Date()
 
-  readline.createInterface({ input, terminal: false })
-    .on("line", async ddc => {
-      ddc = ddc.split(/\s/)[0]
-      if (opt.continue && ddc.localeCompare(opt.continue) < 0) return
-      const result = await analyzer.analyze(ddc)
-      console.log(JSON.stringify(result))
-    })
+  const readInterface = readline.createInterface({ input, terminal: false })
+
+  for await (const line of readInterface) {
+    const ddc = line.split(/\s/)[0]
+    if (opt.continue && ddc.localeCompare(opt.continue) < 0) {
+      return
+    }
+    const result = await analyzer.analyze(ddc)
+    output.write(JSON.stringify(result)+"\n")
+  }
 }
