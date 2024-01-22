@@ -59,10 +59,10 @@ resultSorted.forEach(uri => {
 if (format === "cocoda") {
   console.log(JSON.stringify({
     prefLabel: {
-      de: "DDC-Notationsbestandteile im K10plus"
+      de: "DDC-Notationsbestandteile im K10plus",
     },
     schemes: [{
-      uri: "http://bartoc.org/en/node/241"
+      uri: "http://bartoc.org/en/node/241",
     }],
     concepts: resultSorted.map(uri => result[uri]),
   }, null, 2))
