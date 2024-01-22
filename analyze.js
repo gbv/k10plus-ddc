@@ -30,7 +30,7 @@ async function action(opt, args) {
   for await (const line of readInterface) {
     const ddc = line.split(/\s/)[0]
     if (opt.continue && ddc.localeCompare(opt.continue) < 0) {
-      return
+      continue
     }
     const result = await analyzer.analyze(ddc)
     output.write(JSON.stringify(result)+"\n")
