@@ -1,6 +1,15 @@
 {
   "title": "Analysis of DDC numbers in K10plus union catalogue",
   "description": "This dataset contains an analysis of DDC notations in K10plus union catalogue.",
+  "contributors": [{
+    "title": "Jakob Voß",
+    "path": "https://orcid.org/0000-0002-7613-4123",
+    "role": "maintainer"
+  },{
+    "title": "Verbundzentrale des GBV (VZG)",
+    "path": "https://ror.org/048vdhs48",
+    "role": "publisher"
+  }],
   "sources": [{
     "title": "Normalized subject indexing data of K10plus library union catalog",
     "path": "https://doi.org/10.5281/zenodo.7016625"
@@ -14,7 +23,10 @@
     "description": "sorted DDC notations found in K10plus records, each with number of records it is used in"
   },{
     "path": "ddc-decomposition.ndjson.gz",
-    "description": "full analysis of DDC notations in newline-delimited JSKOS (including incomplete analysis and non-atomic elements)"
+    "description": "full analysis of DDC notations in newline-delimited JSKOS (including incomplete analysis and non-atomic elements)",
+    "format": "jskos",
+    "mediatype": "application/x-ndjson",
+    "compression" : "gz"
   },{
     "path": "ddc-decomposition.csv",
     "format": "csv",

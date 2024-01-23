@@ -16,7 +16,7 @@ The dataset consists of:
 
 - `ddc-frequencies.tsv`: sorted DDC notations found in K10plus records, each with number of records it is used in (tsv format)
 
-- `ddc-decomposition.ndjson.gz`: full analysis of DDC notations in newline-delimited JSKOS (including incomplete analysis and non-atomic elements) 
+- `ddc-decomposition.ndjson.gz`: full analysis of DDC notations in newline-delimited JSKOS (including incomplete analysis and non-atomic elements) (jskos format)
 
 - `ddc-decomposition.csv`: atomic DDC elements from decomposition. First column is original number, following columns are atomic elements (csv format)
 
@@ -29,5 +29,12 @@ The dataset consists of:
   - `number`: number of distinct DDC numbers this atom is used in
 
   - `records`: number of K10plus records this atom is used in
+
+
+## Contributors
+
+- [Jakob Voß](https://orcid.org/0000-0002-7613-4123) (maintainer)
+
+- [Verbundzentrale des GBV (VZG)](https://ror.org/048vdhs48) (publisher)
 
 

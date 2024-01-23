@@ -18,3 +18,8 @@ The dataset consists of:
 <% for(let field of res.schema.fields) { %>
   - `<%= field.name %>`: <%= field.description %>
 <% }}} %>
+<% if (locals.contributors) { %>
+## Contributors
+<% for(let con of contributors) { %>
+- [<%= con.title %>](<%= con.path %>) (<%= con.role %>)
+<% }} %>
