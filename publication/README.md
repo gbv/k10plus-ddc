@@ -1,20 +1,33 @@
-# DDC in K10plus
+# Analysis of DDC numbers in K10plus union catalogue
 
 This dataset contains an analysis of DDC notations in K10plus union catalogue.
 
-The analysis is based on
+## Sources
 
-- Normalized subject indexing data of K10plus library union catalog
-  <https://doi.org/10.5281/zenodo.7016625>
+The data is based on:
 
-- Decomposition of DDC numbers ([coli-ana](https://coli-conc.gbv.de/coli-ana/))
+- [Normalized subject indexing data of K10plus library union catalog](https://doi.org/10.5281/zenodo.7016625)
 
-The dataset was consists of:
+- [Decomposition of DDC numbers (coli-ana)](https://coli-conc.gbv.de/coli-ana/)
 
-- `ddc-frequencies.tsv`: sorted DDC notations found in K10plus records, each with number of records it is used in
+## Resources
 
-Atomic DDC elements from decomposition (`ddc-atoms.tsv`):
-Only atoms from fully decomposed numbers are included.
+The dataset consists of:
 
-    TODO: <ddc-decomposition.ndjson ./ddc-summary.pl | sort -nrk2 > ddc-atoms.tsv
+- `ddc-frequencies.tsv`: sorted DDC notations found in K10plus records, each with number of records it is used in (tsv format)
+
+- `ddc-decomposition.ndjson.gz`: full analysis of DDC notations in newline-delimited JSKOS (including incomplete analysis and non-atomic elements) 
+
+- `ddc-decomposition.csv`: atomic DDC elements from decomposition. First column is original number, following columns are atomic elements (csv format)
+
+- `ddc-atoms.tsv`: atomic DDC numbers found in fully decomposed numbers of K10plus catalogue (tsv format)
+
+  With the following fields:
+
+  - `atom`: atomic DDC number which cannot be decomposed further
+
+  - `number`: number of distinct DDC numbers this atom is used in
+
+  - `records`: number of K10plus records this atom is used in
+
 

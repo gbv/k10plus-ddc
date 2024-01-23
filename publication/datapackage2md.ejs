@@ -1,0 +1,20 @@
+# <%= title %>
+
+<%= description %>
+<% if (locals.sources) { %>
+## Sources
+
+The data is based on:
+<% for(let src of sources) { %>
+- [<%= src.title %>](<%= src.path %>)
+<% }} %>
+## Resources
+
+The dataset consists of:
+<% for(let res of resources) { %>
+- `<%= res.path %>`: <%= res.description %> <%= res.format ? `(${res.format} format)` : "" %>
+<% if (res.schema && res.schema.fields) { %>
+  With the following fields:
+<% for(let field of res.schema.fields) { %>
+  - `<%= field.name %>`: <%= field.description %>
+<% }}} %>

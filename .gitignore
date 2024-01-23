@@ -6,3 +6,4 @@ node_modules/
 *.ndjson
 *.sqlite
 !package*.json
+!datapackage.json

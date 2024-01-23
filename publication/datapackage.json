@@ -1,0 +1,39 @@
+{
+  "title": "Analysis of DDC numbers in K10plus union catalogue",
+  "description": "This dataset contains an analysis of DDC notations in K10plus union catalogue.",
+  "sources": [{
+    "title": "Normalized subject indexing data of K10plus library union catalog",
+    "path": "https://doi.org/10.5281/zenodo.7016625"
+  },{
+    "title": "Decomposition of DDC numbers (coli-ana)",
+    "path": "https://coli-conc.gbv.de/coli-ana/"
+  }],
+  "resources": [{
+    "path": "ddc-frequencies.tsv",
+    "format": "tsv",
+    "description": "sorted DDC notations found in K10plus records, each with number of records it is used in"
+  },{
+    "path": "ddc-decomposition.ndjson.gz",
+    "description": "full analysis of DDC notations in newline-delimited JSKOS (including incomplete analysis and non-atomic elements)"
+  },{
+    "path": "ddc-decomposition.csv",
+    "format": "csv",
+    "description": "atomic DDC elements from decomposition. First column is original number, following columns are atomic elements"
+  },{
+    "path": "ddc-atoms.tsv",
+    "description": "atomic DDC numbers found in fully decomposed numbers of K10plus catalogue",
+    "format": "tsv",
+    "schema": {
+      "fields": [{
+        "name": "atom",
+        "description": "atomic DDC number which cannot be decomposed further"
+      },{
+        "name": "number",
+        "description": "number of distinct DDC numbers this atom is used in"
+      },{
+        "name": "records",
+        "description": "number of K10plus records this atom is used in"
+      }]
+    }
+  }] 
+}
