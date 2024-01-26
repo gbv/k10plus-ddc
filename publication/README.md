@@ -1,6 +1,8 @@
 # Analysis of DDC numbers in K10plus union catalogue
 
-This dataset contains an analysis of DDC notations in K10plus union catalogue.
+<https://doi.org/10.5281/zenodo.10569321>
+
+This dataset contains an analysis of DDC notations in K10plus union catalogue (as of 2023-12-31).
 
 ## Sources
 
@@ -33,8 +35,15 @@ The dataset consists of:
 
 ## Contributors
 
+- [Verbundzentrale des GBV (VZG)](https://ror.org/048vdhs48) (publisher)
+
 - [Jakob Voß](https://orcid.org/0000-0002-7613-4123) (maintainer)
 
-- [Verbundzentrale des GBV (VZG)](https://ror.org/048vdhs48) (publisher)
+- [Ulrike Reiner](http://www.wikidata.org/entity/Q101436909) (contributor)
+
+
+## License
+
+- [Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) (CC0)
 
 

@@ -1,5 +1,7 @@
 # <%= title %>
 
+<% if (locals.id) { %><<%= id %>><% } %>
+
 <%= description %>
 <% if (locals.sources) { %>
 ## Sources
@@ -22,4 +24,9 @@ The dataset consists of:
 ## Contributors
 <% for(let con of contributors) { %>
 - [<%= con.title %>](<%= con.path %>) (<%= con.role %>)
+<% }} %>
+<% if (locals.licenses) { %>
+## License
+<% for(let l of licenses) { %>
+- [<%= l.title %>](<%= l.path %>) (<%= l.name %>)
 <% }} %>
