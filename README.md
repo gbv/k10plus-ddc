@@ -6,6 +6,8 @@ This repository contains scripts to analyze, convert and publish Dewey Decimal C
 [K10plus Subjects]: https://github.com/gbv/k10plus-subjects
 [jskos]: https://format.gbv.de/jskos
 
+**See subdirectory `publication` for script to generate the data publication <https://doi.org/10.5281/zenodo.10569321>**
+
 ## Installation
 
 ~~~sh
@@ -13,6 +15,12 @@ npm ci
 ~~~
 
 ## Usage
+
+### analyze.js
+
+Read a list of (numerically sorted) DDC numbers and generate analysis with coli-ana
+
+#### k10plus-patch.js
 
 The script `bin/k10plus-patch.js`
 
@@ -39,10 +47,6 @@ Options:
 ### simplify-for-pdf.jq
 
     sqlite3 cache.sqlite 'select analysis from coliana' | jq -f simplify-for-pdf.jq -c | sort | uniq
-
-### analyze.js
-
-Read a list of (numerically sorted) DDC numbers and generate analysis with coli-ana
 
 ### count.js
 

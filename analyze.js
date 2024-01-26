@@ -33,6 +33,8 @@ async function action(opt, args) {
       continue
     }
     const result = await analyzer.analyze(ddc)
-    output.write(JSON.stringify(result)+"\n")
+    if (result) {
+      output.write(JSON.stringify(result)+"\n")
+    }
   }
 }
