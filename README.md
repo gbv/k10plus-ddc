@@ -46,7 +46,13 @@ Options:
 
 ### simplify-for-pdf.jq
 
-    sqlite3 cache.sqlite 'select analysis from coliana' | jq -f simplify-for-pdf.jq -c | sort | uniq
+Given the full analysis from coli-ana API in JSKOS format as published at
+<https://doi.org/10.5281/zenodo.10569320>, this jq script can be used to
+simplify the JSKOS records for creation of PDF files for each DDC number:
+
+~~~sh
+zcat ddc-decomposition.ndjson.gz | jq -c -f simplify-for-pdf.jq -c > ddc-pdf-data.ndjson
+~~~
 
 ### count.js
 
